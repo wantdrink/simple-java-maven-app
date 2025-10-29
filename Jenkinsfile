@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'maven' // <-- This must match the Pod Template label!
+        label 'maven-jdk' // <-- This must match the Pod Template label!
     }
     stages {
         stage('Checkout Code') {
@@ -13,8 +13,8 @@ pipeline {
         }
 
         stage('Build') {
-            container('maven') {
-                steps {
+            steps {
+                container('maven-jdk') {
                     sh 'echo "Running Maven build inside the Jelastic Maven JDK 21 container..."'
                     sh 'mvn -B -DskipTests clean package'
                 }
