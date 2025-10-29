@@ -1,14 +1,10 @@
 pipeline {
     agent any
     stages {
-         stage('test pipeline') {
-            sh(script: """
-               echo "hello"
-               git clone https://github.com/marcel-dempers/docker-development-youtube-series.git
-               cd ./docker-development-youtube-series/golang
-
-               docker build . -t test
-            """)
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
         }
     }
 }
