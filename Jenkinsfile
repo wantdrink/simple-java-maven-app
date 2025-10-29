@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label 'maven-jdk' // <-- This must match the Pod Template label!
-    }
+    agent any
 
     tools {
         maven 'M3'
@@ -19,12 +17,10 @@ pipeline {
 
         stage('Build') {
             steps {
-                container('maven-jdk') {
-                    sh '''
-                        echo 'start maven'
-                        mvn -B clean package
-                    '''
-                }
+                sh '''
+                    echo 'start maven'
+                    mvn -B clean package
+                '''
             }
         }
     }
