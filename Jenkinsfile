@@ -16,9 +16,12 @@ pipeline {
             steps {
                 container('maven-jdk') {
                     sh '''
-                        # Set the proxy environment variables
-                        echo "Running Maven build inside the Jelastic Maven JDK 21 container..."
-                        mvn -B -DskipTests clean package
+                         mvn -B clean package \\
+                        -Dhttp.proxyHost=proxy-nasa.svcs.entsvcs.com \\
+                        -Dhttp.proxyPort=8080 \\
+                        -Dhttps.proxyHost=proxy-nasa.svcs.entsvcs.com \\
+                        -Dhttps.proxyPort=8080 \\
+                        -Dhttp.nonProxyHosts="localhost|127.0.0.1|*.cluster.local"
                     '''
                 }
             }
