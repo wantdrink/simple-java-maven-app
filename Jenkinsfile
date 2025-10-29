@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'maven-jdk21' // <-- This must match the Pod Template label!
+        label 'maven' // <-- This must match the Pod Template label!
     }
     stages {
         stage('Checkout Code') {
