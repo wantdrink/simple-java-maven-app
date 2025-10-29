@@ -2,6 +2,11 @@ pipeline {
     agent {
         label 'maven-jdk' // <-- This must match the Pod Template label!
     }
+
+    tools {
+        maven 'M3'
+    }
+
     stages {
         stage('Checkout Code') {
             steps {
@@ -16,12 +21,8 @@ pipeline {
             steps {
                 container('maven-jdk') {
                     sh '''
-                         mvn -B clean package \\
-                        -Dhttp.proxyHost=proxy-nasa.svcs.entsvcs.com \\
-                        -Dhttp.proxyPort=8080 \\
-                        -Dhttps.proxyHost=proxy-nasa.svcs.entsvcs.com \\
-                        -Dhttps.proxyPort=8080 \\
-                        -Dhttp.nonProxyHosts="localhost|127.0.0.1|*.cluster.local"
+                        echo 'start maven'
+                        mvn -B clean package
                     '''
                 }
             }
