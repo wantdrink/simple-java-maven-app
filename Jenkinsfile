@@ -13,7 +13,7 @@ pipeline {
         }
 
         stage('Build') {
-            container('maven-jdk21') {
+            container('maven') {
                 steps {
                     sh 'echo "Running Maven build inside the Jelastic Maven JDK 21 container..."'
                     sh 'mvn -B -DskipTests clean package'
